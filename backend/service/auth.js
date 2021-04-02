@@ -97,3 +97,24 @@ exports.logout = async (req, res) => {
   
   return res.json({ success: true,message: "Logged Out Successfully!"});
 };
+
+exports.getprofile = async (req, res) => {
+  var [err, result] = await promise(authDAO.getUserByEmail(req));
+  delete result.password;
+  
+  if (err) return res.json({ success: false, err_code: err.code, message: err });
+  return res.send(result.rows[0]);
+};
+
+exports.updateprofile = async (req, res) => {
+  if (!req.body.mobile) {
+    return res.json({ success: false, err_code: 403, message: "Mobile Number Required!" });
+
+  }
+
+  var [err, result] = await promise(authDAO.updateprofile(req));
+
+  if (err) return res.json({ success: false, err_code: err.code, message: err });
+  
+  return res.json({ success: true,message: "Profile updated Succesfully"});
+};
