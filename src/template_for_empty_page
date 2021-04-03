@@ -1,0 +1,52 @@
+import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./MyProfile.css";
+import Navbar from "./Navbar";
+import Home from "./Home";
+
+export default function MyProfile() {
+  return (
+    <div>
+      <Navbar />
+      <div className="home">
+        <div className="home__container">
+          <div className="home__sidebar">
+            <div className="button__container">
+              <a className="sidebar__button" href="./Home">
+                <button className="button__in">Dashboard</button>
+              </a>
+              <a className="sidebar__button">
+                <button className="button__in">Wishlist</button>
+              </a>
+              <a className="sidebar__button">
+                <button className="button__in">History</button>
+              </a>
+              <a className="sidebar__button">
+                <button className="button__in">As Seller</button>
+              </a>
+              <a className="sidebar__button" href="./MyProf">
+                <button className="button__in">My Profile</button>
+              </a>
+            </div>
+          </div>
+
+          <div className="home__mainbar">
+            <div className="mainbar__container">
+              <h1> My Profile </h1>
+              {/* ----------------------------------------------- */}
+              {/* ----------------------------------------------- */}
+              {/* ----------------------------------------------- */}
+              {/* ----------------My Profile Code---------------- */}
+              {/* ----------------------------------------------- */}
+              {/* ----------------------------------------------- */}
+              {/* ----------------------------------------------- */}
+              {/* ----------------------------------------------- */}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
