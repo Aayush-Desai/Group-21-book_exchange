@@ -3,7 +3,7 @@
 require("dotenv").config();
 const fs = require("fs");
 const bcrypt = require("bcrypt");
-const jwtt = require("jsonwebtoken");
+//const jwtt = require("jsonwebtoken");
 
 // Utilities
 const promise = require("../utils/promise");
@@ -26,7 +26,7 @@ exports.deleteRequest = async (req, res) => {
 
 // Getting buyerHistory
 exports.GetbuyerHistory = async (req,res) => {
-  var [err, result] = await promise(authDAO.GetbuyerHistory(req));
+  var [err, result] = await promise(buyerHistoryDAO.GetbuyerHistory(req));
 
   if (err) return res.json({ success: false, err_code: 500 , message: "Error."});
   return res.send(result.rows);

@@ -1,4 +1,4 @@
-set search_path to "book_exchange";
+-- set search_path to "book_exchange";
 
 CREATE TABLE "book_exchange".USERS(
 	EMAIL VARCHAR PRIMARY KEY,

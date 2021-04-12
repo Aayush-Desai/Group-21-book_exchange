@@ -1,5 +1,5 @@
 var db = require("../utils/connection");
-var jwt = require("jwt-simple");
+//var jwt = require("jwt-simple");
 require("dotenv").config();
 
 

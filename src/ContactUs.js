@@ -2,7 +2,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./ContactUs.css";
 //import ProductBox from "./ProductBox";
-import Navbar from "./Navbar";
+import Navbar from "./NavBar";
 //import imgx from "./image__long__hair.png";
 
 export default function AboutUs() {

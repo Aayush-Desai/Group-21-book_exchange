@@ -4,7 +4,7 @@ import "./Home.css";
 import ProductBox from "./ProductBox";
 import { NavLink } from "react-router-dom";
 import WishlistBox from "./WishlistBox";
-import Navbar from "./Navbar";
+import Navbar from "./NavBar";
 import SearchBar from "./SearchBar";
 import MyProf from "./MyProfile";
 import WishList from "./WishList";

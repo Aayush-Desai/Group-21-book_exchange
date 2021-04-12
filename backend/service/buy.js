@@ -2,7 +2,7 @@
 require("dotenv").config();
 const fs = require("fs");
 const bcrypt = require("bcrypt");
-const jwtt = require("jsonwebtoken");
+//const jwtt = require("jsonwebtoken");
 
 // Utilities
 const promise = require("../utils/promise");

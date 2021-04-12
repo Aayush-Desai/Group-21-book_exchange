@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import "./LoginRegister.css";
 import Log from "./Login";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Navbar from "./Navbar";
+import Navbar from "./NavBar";
 import titleimage from "./main__page__image@2x.png";
 import signupUser from "../src/service/auth/signup";
 import { Redirect } from "react-router";

@@ -5,9 +5,9 @@ const bodyparser = require("body-parser");
 const auth = require("./routes/auth");
 const sellerHistory = require("./routes/sellerHistory");
 const seller = require("./routes/seller");
-const buy = requre("./routes/buy");
-const buyerHistory = requre("./routes/buyerHistory");
-const wishlist = requre("./routes/wishlist");
+const buy = require("./routes/buy");
+const buyerHistory = require("./routes/buyerHistory");
+const wishlist = require("./routes/wishlist");
 
 const cors = require("cors");
 // Middlewares For BodyParser
