@@ -7,8 +7,9 @@ import Navbar from "./NavBar";
 import titleimage from "./main__page__image@2x.png";
 import signupUser from "../src/service/auth/signup";
 import { Redirect } from "react-router";
+import { NavLink } from "react-router-dom";
 
-export default function Register({ setToken }) {
+export default function Register() {
   // ----------------------
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -25,7 +26,7 @@ export default function Register({ setToken }) {
     });
     if (token.success) {
       console.log(token);
-      setToken(token);
+      alert(token.message+ ": Click Ok to go to login page");
       setVar(true);
     } else alert(token.err_code);
   };
@@ -98,7 +99,7 @@ export default function Register({ setToken }) {
                     Sign up
                   </button>
                   <p className="forgot-password text-right spacing__text">
-                    <a href="/">Login</a>
+                    <NavLink to="/">Login</NavLink>
                   </p>
                 </form>
                 {/* -------------------------------------------------------- */}
@@ -107,7 +108,7 @@ export default function Register({ setToken }) {
           </div>
         </div>
       ) : (
-        <Redirect to="/Login" />
+        <Redirect to="/" />
       )}
     </React.Fragment>
   );

@@ -9,6 +9,7 @@ import titleimage from "./main__page__image@2x.png";
 import loginUser from "../src/service/auth/signin";
 import { Redirect } from "react-router";
 import {AuthContext} from './App';
+import { NavLink } from "react-router-dom";
 // ----------------------------------------------------
 
 // ----------------------------------------------------
@@ -117,7 +118,7 @@ export default function Login() {
                 Sign in
               </button>
               <p className="forgot-password text-right spacing__text">
-                <a href="/Reg">Register</a>
+                <NavLink to="/Reg">Register</NavLink>
               </p>
             </form>
             {/* -------------------------------------------------------- */}

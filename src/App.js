@@ -40,18 +40,25 @@ function App() {
     <BrowserRouter>
       <AuthContext.Provider value={{isSet,setVar}}>
         {!isSet?(
-          <Login/>
-        ):(
           <Switch>
           <div className="App">
-            <Route path="/Home" exact component={Home} />
             <Route path="/" exact component={Login} />
             <Route path="/Reg" exact component={Register} />
             <Route path="/AbtUs" exact component={AboutUs} />
             <Route path="/ContUs" exact component={ContactUs} />
+            <Redirect to="/"/>
+          </div>
+          </Switch>
+        ):(
+          <Switch>
+          <div className="App">
+            <Route path="/Home" exact component={Home} />
+            <Route path="/AbtUs" exact component={AboutUs} />
+            <Route path="/ContUs" exact component={ContactUs} />
             <Route path="/MyProf" exact component={MyProfile} />
             <Route path="/WishList" exact component={WishList} />
-            
+            <Route path="/" exact component={Login} />
+            <Redirect to="/Home"/>
           </div>
           </Switch>
         )}

@@ -22,11 +22,11 @@ exports.signup = async (req, res) => {
   var [err, result] = await promise(authDAO.getUserByEmail(req));
   
   if (err) return res.json({ success: false, err_code: err.code, message: err});
-
+  //console.log(result.rows[0]);
   if (result.rows.length > 0) { 
     return res.json({ success: false, err_code: 401, message: "User Already Exists!"});
   }
-
+  //console.log("Hello from SignUp");
   // if (req.body.password !== req.body.conpassword)
   //   return res.sendError(null, 403, "Passwords do not match!");
 
@@ -36,9 +36,9 @@ exports.signup = async (req, res) => {
   var [err1, hashedpw] = await promise(bcrypt.hash(req.body.password, 12));
 
   if (err1) return res.json({ success: false, err_code: err1.code, message: err1 });
-  req.body.password = hashedpw;
+  //req.body.password = hashedpw;
   var [err2, result1] = await promise(authDAO.addUser(req));
-  console.log(err2);
+  //console.log(err2);
   if (err2) return res.json({ success: false, err_code: err2.code, message: err2 });
   
   

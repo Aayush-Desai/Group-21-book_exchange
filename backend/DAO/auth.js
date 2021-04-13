@@ -7,13 +7,13 @@ exports.getUserByEmail = async (req) => {
 
 exports.addUser = async (req) => {
   return db.query(
-    "insert into book_exchange.USERS (email, password, name, student_id, mobile, verified) values ($1,$2,$3,$4,$5,$6)",
+    "insert into book_exchange.USERS (email, password, name, student_id, mobile, verification) values ($1,$2,$3,$4,$5,$6)",
     [
       req.body.email,
       req.body.password,
       req.body.name,
-      req.body.student_id,
-      req.body.mobile,
+      null,
+      null,
       true
     ]
   );
