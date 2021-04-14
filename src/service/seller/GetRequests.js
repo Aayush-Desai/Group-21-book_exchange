@@ -5,12 +5,11 @@ export default async ({ book_id }) => {
     method: "GET",
     headers: {
       "Content-Type": "application/json"
-    },
-    body: {
-      book_id
     }
   };
-  const url = "/seller/getrequests";
+  const url1 = "/seller/getrequests";
+  const url = `${url1}/?book_id=${book_id}`;
+
   const response = await fetchData(url, fetchOptions);
   return response;
 };

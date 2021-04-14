@@ -18,12 +18,19 @@ exports.AddToWishList = async (req) => {
 
 // Display Top 10 books
 exports.GetAvailableBook = async (req) => {
-  return db.query("SELECT TOP 10 * FROM book_exchange.AVAILABLE_BOOKS");
+  return db.query("SELECT book_id,email,AVAILABLE_BOOKS.isbn,course,price,book_name,author FROM book_exchange.AVAILABLE_BOOKS NATURAL JOIN book_exchange.book_details LIMIT 10");
 }
 
 
 // Search Book 
 exports.SearchBook = async (req) => {
-  return db.query("select * from book_exchange.book_details where book_name like ($1)",[req.body.book_name+'%']);
+  var qur="SELECT book_id,email,AVAILABLE_BOOKS.isbn,course,price,book_name,author FROM book_exchange.AVAILABLE_BOOKS NATURAL JOIN book_exchange.book_details where book_name like ";
+  qur+="'";
+  qur+= req.query.bookname;
+  qur+="%";
+  qur+="'";
+  console.log(req.url);
+  console.log(qur);
+  return db.query(qur);
 }
 

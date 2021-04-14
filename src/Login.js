@@ -7,6 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "./NavBar";
 import titleimage from "./main__page__image@2x.png";
 import loginUser from "../src/service/auth/signin";
+import getUser from "../src/service/auth/getUser";
 import { Redirect } from "react-router";
 import {AuthContext} from './App';
 import { NavLink } from "react-router-dom";
@@ -21,7 +22,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   //const [isSet, setVar] = useState(false);
   const [redirect, setRedirect] = useState(false);
-  const { isSet,setVar } = useContext(AuthContext);
+  const { isSet,setVar,setUser } = useContext(AuthContext);
   // const handleSubmit = async (e) => {
   //   e.preventDefault();
   //   //if(tok) localStorage.clear();
@@ -48,6 +49,8 @@ export default function Login() {
 
     if (content.success) 
     {
+      const user=await getUser();
+      setUser(user);
       setRedirect(true);
     }
     else alert(content.err_code);
@@ -55,8 +58,6 @@ export default function Login() {
 
   if (redirect) {
     setVar(true);
-    console.log(isSet);
-    //setToken(true);
     return <Redirect to="/Home" />;
   }
 

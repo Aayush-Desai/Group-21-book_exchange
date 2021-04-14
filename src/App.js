@@ -27,6 +27,7 @@ function App() {
   //   })();
   // });
   const [isSet, setVar] = useState({});
+  const [user, setUser] = useState({});
   //if(!isSet) return <Login setVar={setVar}/>
     // Component Did Mount
     useEffect(() => {
@@ -38,7 +39,7 @@ function App() {
   console.log(isSet);
   return (
     <BrowserRouter>
-      <AuthContext.Provider value={{isSet,setVar}}>
+      <AuthContext.Provider value={{isSet,setVar,user,setUser}}>
         {!isSet?(
           <Switch>
           <div className="App">

@@ -49,12 +49,12 @@ exports.DeemBook = async (req) => {
 // Get the list of books which are currently for sale
 exports.GetBooksForSale = async (req) => {
   return db.query("select book_exchange.book_details.Book_name,book_details.author,available_books.price from book_exchange.available_books,book_exchange.book_details where available_books.email = $1 and available_books.isbn = book_details.isbn;", [
-    req.body.email]);
+    req.session.email]);
 }
 
 
 // Get all buy requests of a particular book
 exports.GetRequests = async (req) => {
   return db.query("select users.name, users.student_id, users.mobile from book_exchange.users,book_exchange.history where history.email=users.email and history.book_id=$1;",[
-    req.body.book_id]);
+    req.query.book_id]);
 }

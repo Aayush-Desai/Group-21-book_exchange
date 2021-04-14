@@ -1,7 +1,9 @@
 var db = require("../utils/connection");
+//const session = require('express-session');
+
 
 exports.getUserByEmail = async (req) => {
-  console.log("from Database");
+  //console.log("from Database");
   return db.query("select * from book_exchange.USERS where email = $1 ", [req.body.email]);
 };
 
@@ -24,4 +26,8 @@ exports.updateprofile = async (req) => {
     req.body.mobile,
     req.body.email
   ]);
+};
+
+exports.getprofile = async (req) => {
+  return db.query("select * from book_exchange.USERS where email = $1 ", [req.session.user.email]);
 };

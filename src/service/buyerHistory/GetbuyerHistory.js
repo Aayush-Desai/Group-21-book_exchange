@@ -1,17 +1,15 @@
 import fetchData from "../../fetchData";
 
-export default async ({email,email}) => {
+export default async ({email}) => {
   const fetchOptions = {
     method: "GET",
     headers: {
       "Content-Type": "application/json"
     }
-    body: {
-      email,
-      email
-    }
   };
-  const url = "/buyerHistory/GetbuyerHistory";
+  const url1 = "/buyerHistory/GetbuyerHistory";
+  const url = `${url1}/?email=${email}`;
+
   const response = await fetchData(url, fetchOptions);
   return response;
 };

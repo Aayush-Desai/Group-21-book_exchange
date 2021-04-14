@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Home.css";
 import ProductBox from "./ProductBox";
@@ -8,6 +8,11 @@ import Navbar from "./NavBar";
 import SearchBar from "./SearchBar";
 import MyProf from "./MyProfile";
 import WishList from "./WishList";
+import getAvailableBook from "../src/service/buy/GetAvailableBook";
+import searchBook from "../src/service/buy/SearchBook";
+import addToWishList from "../src/service/buy/AddToWishList";
+import buyBook from "../src/service/buy/BuyBook";
+import {AuthContext} from './App';
 
 let addtowishlist = [];
 
@@ -16,6 +21,35 @@ function Home() {
     margin: "20px auto",
     color: "grey"
   };
+  const [bookList,setBookList]=useState([]);
+  const [bookName,setBookName]=useState("xyz1");
+  const { user, setUser } = useContext(AuthContext);
+
+  useEffect(() => {
+    const init = async () => {
+      const data=await getAvailableBook();
+      setBookList(data);
+    };
+    init();
+  },[]);
+
+  const handleSearch = async () =>{
+    //console.log("HII");
+    setBookName(bookName);
+    const data=await searchBook({bookName});
+    setBookName(data);
+    
+  }
+
+  const handleWishList= async (book_id) =>{
+    const data=await addToWishList({email: user.email,book_id: book_id});
+    alert(data.message);
+  }
+
+  const handleBuyBook= async (book_id) =>{
+    const data=await buyBook({email: user.email,book_id: book_id});
+    alert(data.message);
+  }
 
   return (
     <div>

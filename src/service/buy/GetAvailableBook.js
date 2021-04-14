@@ -7,7 +7,7 @@ export default async () => {
       "Content-Type": "application/json"
     }
   };
-  const url = "/buy/GetAvailableBooks";
+  const url = "/buy/getavailablebook";
   const response = await fetchData(url, fetchOptions);
   return response;
 };

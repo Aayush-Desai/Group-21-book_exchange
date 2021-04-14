@@ -11,7 +11,7 @@ export default async ({ email, book_id }) => {
       book_id
     }
   };
-  const url = "/buy/BuyBook";
+  const url = "/buy/addtowishlist";
   const response = await fetchData(url, fetchOptions);
   return response;
 };

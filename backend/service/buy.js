@@ -39,7 +39,7 @@ exports.AddToWishList = async (req, res) => {
 // Display Top 10 books
 exports.GetAvailableBook = async (req,res) => {
     var [err, result] = await promise(buyDAO.GetAvailableBook(req));
-
+    //console.log(result);
     if (err) return res.json({ success: false, err_code: 500, message: "Internal Server Error. Please try again."});
 
     return res.send(result.rows);
@@ -48,6 +48,7 @@ exports.GetAvailableBook = async (req,res) => {
 // Search Book 
 exports.SearchBook = async (req,res) => {
     var [err,result] = await promise(buyDAO.SearchBook(req));
+    //console.log(result.rows);
     if (err) return res.json({ success: false, err_code: 500, message: "Book Not Available!"});
 
     return res.send(result.rows);

@@ -15,6 +15,6 @@ exports.removeFromwishlist = async (req) => {
 exports.GetFromwishlist = async (req) => {
  return db.query(
    "SELECT AVAILABLE_BOOKS.book_id,AVAILABLE_BOOKS.email,ISBN,course,price FROM book_exchange.AVAILABLE_BOOKS INNER JOIN book_exchange.WISHLIST ON AVAILABLE_BOOKS.book_id = WISHLIST.book_id WHERE EMAIL= $1 ",
-   [req.body.email]
+   [req.session.email]
   );
 };
