@@ -22,7 +22,7 @@ function Home() {
     color: "grey"
   };
   const [bookList,setBookList]=useState([]);
-  const [bookName,setBookName]=useState("xyz1");
+  const [bookName,setBookName]=useState("");
   const { user, setUser } = useContext(AuthContext);
 
   useEffect(() => {

@@ -87,7 +87,7 @@ exports.signin = async (req, res) => {
   //console.log(req.token);
   req.session.loggedin = true;
 	req.session.user = user;
-  console.log(req.session.user.email);
+  //console.log(req.session.user.email);
   return res.json({ success: true,token: process.env.COOKIE_TOKEN,message: "Successfully logged In"});
 };
 

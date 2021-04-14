@@ -1,4 +1,4 @@
-import React from "react";
+import React,{ useState, useEffect, useContext } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./WishList.css";
 import Navbar from "./NavBar";
@@ -7,9 +7,35 @@ import Home from "./Home";
 import MyProf from "./MyProfile";
 import { addtowishlist } from "./Home";
 import { NavLink } from "react-router-dom";
+import getFromwishlist from "../src/service/wishlist/GetFromwishlist";
+import removeFromwishlist from "../src/service/wishlist/removeFromwishlist";
+import buyBook from "../src/service/buy/BuyBook";
+import {AuthContext} from './App';
 
 export default function WishList() {
-  console.log(addtowishlist);
+  const [bookList,setBookList]=useState([]);
+  const [bookName,setBookName]=useState("xyz1");
+  const { user, setUser } = useContext(AuthContext);
+
+  useEffect(() => {
+    const init = async () => {
+      const data=await getFromwishlist();
+      setBookList(data);
+    };
+    init();
+  },[]);
+
+  const handleBuyBook= async (book_id) =>{
+    const data=await buyBook({email: user.email,book_id: book_id});
+    alert(data.message);
+  }
+
+  const handleRemove= async (book_id) =>{
+    const data=await removeFromwishlist({book_id: book_id});
+    alert(data.message);
+  }
+
+  console.log(bookList);
   return (
     <div>
       <Navbar />

@@ -29,8 +29,6 @@ exports.SearchBook = async (req) => {
   qur+= req.query.bookname;
   qur+="%";
   qur+="'";
-  console.log(req.url);
-  console.log(qur);
   return db.query(qur);
 }
 
