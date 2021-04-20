@@ -12,18 +12,18 @@ import getAvailableBook from "../src/service/buy/GetAvailableBook";
 import searchBook from "../src/service/buy/SearchBook";
 import addToWishList from "../src/service/buy/AddToWishList";
 import buyBook from "../src/service/buy/BuyBook";
-import {AuthContext} from './App';
+import { AuthContext } from './App';
 
 
-let addtowishlist=[]
+let addtowishlist = []
 function Home() {
   const style = {
     margin: "20px auto",
     color: "grey"
   };
 
-  const [bookList,setBookList]=useState([]);
-  const [bookName,setBookName]=useState("");
+  const [bookList, setBookList] = useState([]);
+  const [bookName, setBookName] = useState("");
   const { user, setUser } = useContext(AuthContext);
 
   useEffect(() => {
@@ -33,23 +33,23 @@ function Home() {
       setBookList(data);
     };
     init();
-  },[]);
+  }, []);
 
   const handleSearch = async () => {
     //console.log("HII");
     //setBookName(bookName);
-    const data=await searchBook({bookName});
+    const data = await searchBook({ bookName });
     setBookList(data);
-    
+
   }
 
-  const handleWishList= async (book_id) =>{
-    const data=await addToWishList({email: user.email,book_id: book_id});
+  const handleWishList = async (book_id) => {
+    const data = await addToWishList({ email: user.email, book_id: book_id });
     alert(data.message);
   }
 
-  const handleBuyBook= async (book_id) =>{
-    const data=await buyBook({email: user.email,book_id: book_id});
+  const handleBuyBook = async (book_id) => {
+    const data = await buyBook({ email: user.email, book_id: book_id });
     alert(data.message);
   }
 
@@ -91,7 +91,7 @@ function Home() {
 
             <div className="home__row">
 
-              { bookList &&  bookList.map((book) => (
+              {bookList && bookList.map((book) => (
                 < ProductBox
                   key={book.book_id}
                   title={book.book_name}
@@ -100,7 +100,7 @@ function Home() {
                   handleWishList={handleWishList}
                   handleBuyBook={handleBuyBook}
                 />
-              )) 
+              ))
               }
 
             </div>
