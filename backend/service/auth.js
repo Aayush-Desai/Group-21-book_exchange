@@ -2,6 +2,9 @@
 require("dotenv").config();
 const bcrypt = require("bcrypt");
 const jwtt = require("jsonwebtoken");
+//const cookie = require("cookie-parser");
+//const session = require('express-session');
+
 
 // Utilities
 const promise = require("../utils/promise");
@@ -22,11 +25,11 @@ exports.signup = async (req, res) => {
   var [err, result] = await promise(authDAO.getUserByEmail(req));
   
   if (err) return res.json({ success: false, err_code: err.code, message: err});
-
+  //console.log(result.rows[0]);
   if (result.rows.length > 0) { 
     return res.json({ success: false, err_code: 401, message: "User Already Exists!"});
   }
-
+  //console.log("Hello from SignUp");
   // if (req.body.password !== req.body.conpassword)
   //   return res.sendError(null, 403, "Passwords do not match!");
 
@@ -36,9 +39,9 @@ exports.signup = async (req, res) => {
   var [err1, hashedpw] = await promise(bcrypt.hash(req.body.password, 12));
 
   if (err1) return res.json({ success: false, err_code: err1.code, message: err1 });
-  req.body.password = hashedpw;
+  //req.body.password = hashedpw;
   var [err2, result1] = await promise(authDAO.addUser(req));
-  console.log(err2);
+  //console.log(err2);
   if (err2) return res.json({ success: false, err_code: err2.code, message: err2 });
   
   
@@ -53,7 +56,7 @@ exports.signin = async (req, res) => {
   var [err, result] = await promise(authDAO.getUserByEmail(req));
   //console.log(err);
   if (err) return res.json({ success: false, err_code: err.code, message: err });
-  console.log(result);
+  //console.log(result);
   
   if (result.rows.length === 0)
     return res.json({ success: false, err_code: 402, message: "User does not exist!" });
@@ -65,45 +68,44 @@ exports.signin = async (req, res) => {
   var user = result.rows[0];
   delete user.password;
 
-  var token = jwtt.sign(
-    {
-      email: user.email
-    },
-    process.env.COOKIE_TOKEN,
-    { expiresIn: expire.cookieExpire }
-  );
-  var success = await myCache.set(
-    token,
-    JSON.stringify(user),
-    expire.cookieExpire
-  );
+  // var token = jwtt.sign(
+  //   {
+  //     email: user.email
+  //   },
+  //   process.env.COOKIE_TOKEN,
+  //   { expiresIn: expire.cookieExpire }
+  // );
+  // var success = await myCache.set(
+  //   token,
+  //   JSON.stringify(user),
+  //   expire.cookieExpire
+  // );
   
-  if (!success) return res.json({ success: false, err_code: 403, message: "Internal Server Error" });
+  // if (!success) return res.json({ success: false, err_code: 403, message: "Internal Server Error" });
 
-  res.cookie("jwt", token);
-  
+  // res.cookie("jwt", token);
+  //console.log(req.token);
+  req.session.loggedin = true;
+	req.session.user = user;
+  //console.log(req.session.user.email);
   return res.json({ success: true,token: process.env.COOKIE_TOKEN,message: "Successfully logged In"});
 };
 
 exports.logout = async (req, res) => {
-  
-  if (!req.cookies.jwt) return res.json({ success: false, err_code: 403, message: "Invalid URL" });
-
-  var value = await myCache.del(req.cookies.jwt);
-  
-  if (!value) return res.json({ success: false, err_code: 500, message: "Internal Server Error" });
-
-  res.clearCookie("jwt");
+	req.session.user = {};
+  if (!req.session.loggedin) return res.json({ success: false, err_code: 403, message: "Invalid URL" });
+  req.session.loggedin=false;
   
   return res.json({ success: true,message: "Logged Out Successfully!"});
 };
 
 exports.getprofile = async (req, res) => {
-  var [err, result] = await promise(authDAO.getUserByEmail(req));
-  delete result.password;
-  
+  var [err, result] = await promise(authDAO.getprofile(req));
+  //console.log(req.user);
   if (err) return res.json({ success: false, err_code: err.code, message: err });
-  return res.send(result.rows[0]);
+  var user = result.rows[0];
+  delete user.password;
+  return res.send(user);
 };
 
 exports.updateprofile = async (req, res) => {

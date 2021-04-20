@@ -2,7 +2,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./AboutUs.css";
 //import ProductBox from "./ProductBox";
-import Navbar from "./Navbar";
+import Navbar from "./NavBar";
 import image2 from "./image_abt_us@2x.png";
 //import image1 from "./pattern.png";
 

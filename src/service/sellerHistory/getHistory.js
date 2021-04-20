@@ -1,13 +1,10 @@
 import fetchData from "../../fetchData";
 
-export default async ({email}) => {
+export default async () => {
   const fetchOptions = {
     method: "GET",
     headers: {
       "Content-Type": "application/json"
-    },
-    body: {
-      email
     }
   };
   const url = "/sellerHistory/getHistory";

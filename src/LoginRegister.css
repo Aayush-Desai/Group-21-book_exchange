@@ -1,0 +1,122 @@
+body {
+    background-color: aliceblue;
+  }
+  
+  .login__container {
+    background-color: aliceblue;
+  }
+  
+  .leftside {
+    height: 100vh;
+  }
+  
+  .leftside > p {
+    padding-bottom: 0;
+  }
+  
+  .rightside {
+    height: 100vh;
+    right: 0;
+    vertical-align: center;
+  }
+  
+  .title__image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 500px;
+    margin: auto;
+  }
+  
+  .row {
+    /* position: relative; */
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  
+  /* .login__text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    font-weight: 900;
+    font-family: poppins, sans-serif;
+    width: 80%;
+    margin-bottom: 0;
+  } */
+  
+  .blue__text {
+    color: rgb(0, 140, 255);
+  }
+  
+  .login__box {
+    text-align: center;
+    position: absolute;
+    height: 60%;
+    width: 80%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: auto;
+    border-radius: 20px;
+    box-shadow: 0px 2px 5px #ccc;
+    max-width: 600px;
+  }
+  
+  /* ---------------------------------------------- */
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  .a__form {
+    width: 70%;
+    margin: 5% auto;
+  }
+  
+  .a__form > p {
+    padding: 0px;
+  }
+  
+  .btn {
+    margin: 30px auto;
+    margin-bottom: 15px;
+    background-color: rgba(0, 140, 255, 0.747);
+    outline: none;
+    border: none;
+  }
+  
+  .spacing__text {
+    margin-top: 10px;
+  }
+  
+  .title__image {
+    width: 60%;
+    margin: 20px auto;
+  }
+  
+  .class1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    font-weight: 900;
+    font-family: poppins, sans-serif;
+    width: 60%;
+    margin-bottom: 0;
+  }
+  
+  @media (max-width: 1000px) {
+    .title__image {
+      width: 90%;
+      margin: 20px auto;
+    }
+    .login__box {
+      height: 55%;
+    }
+  }
+  

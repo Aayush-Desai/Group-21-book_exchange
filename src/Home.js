@@ -12,7 +12,8 @@ import getAvailableBook from "../src/service/buy/GetAvailableBook";
 import searchBook from "../src/service/buy/SearchBook";
 import addToWishList from "../src/service/buy/AddToWishList";
 import buyBook from "../src/service/buy/BuyBook";
-import { AuthContext } from './App';
+import {AuthContext} from './App';
+
 
 
 function Home() {
@@ -20,8 +21,9 @@ function Home() {
     margin: "20px auto",
     color: "grey"
   };
-  const [bookList, setBookList] = useState([]);
-  const [bookName, setBookName] = useState("");
+
+  const [bookList,setBookList]=useState([]);
+  const [bookName,setBookName]=useState("");
   const { user, setUser } = useContext(AuthContext);
 
   useEffect(() => {
@@ -40,6 +42,15 @@ function Home() {
 
   }
 
+  const handleWishList= async (book_id) =>{
+    const data=await addToWishList({email: user.email,book_id: book_id});
+    alert(data.message);
+  }
+
+  const handleBuyBook= async (book_id) =>{
+    const data=await buyBook({email: user.email,book_id: book_id});
+    alert(data.message);
+  }
 
   return (
     <div>
