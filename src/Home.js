@@ -14,7 +14,6 @@ import addToWishList from "../src/service/buy/AddToWishList";
 import buyBook from "../src/service/buy/BuyBook";
 import { AuthContext } from './App';
 
-let addtowishlist = [];
 
 function Home() {
   const style = {
@@ -41,15 +40,6 @@ function Home() {
 
   }
 
-  const handleWishList = async (book_id) => {
-    const data = await addToWishList({ email: user.email, book_id: book_id });
-    alert(data.message);
-  }
-
-  const handleBuyBook = async (book_id) => {
-    const data = await buyBook({ email: user.email, book_id: book_id });
-    alert(data.message);
-  }
 
   return (
     <div>
@@ -86,31 +76,17 @@ function Home() {
               <h3 style={style}>Your Dashboard</h3>
             </div>
 
+
             <div className="home__row">
-              <ProductBox
-                title="Think Like a Monk"
-                author="Jay shetty"
-                price="70"
-                addtowishlist={addtowishlist}
-              />
-              <ProductBox
-                title="Think Like Monk1"
-                author="Jay shetty1"
-                price="80"
-                addtowishlist={addtowishlist}
-              />
-              <ProductBox
-                title="Think Like Monk2"
-                author="Jay shetty2"
-                price="90"
-                addtowishlist={addtowishlist}
-              />
-              <ProductBox
-                title="Think Like Monk3"
-                author="Jay shetty3"
-                price="100"
-                addtowishlist={addtowishlist}
-              />
+
+              {bookList && bookList.map((d, i) => {
+                < ProductBox
+                  title="Think Like a Monk"
+                  author="Jay shetty"
+                  price="70"
+                />
+              })}
+
             </div>
           </div>
         </div>

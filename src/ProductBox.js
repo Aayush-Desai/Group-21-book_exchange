@@ -1,7 +1,14 @@
 import React from "react";
 import "./ProductBox.css";
+import buyBook from "../src/service/buy/BuyBook";
+import addToWishList from "../src/service/buy/AddToWishList";
+import { AuthContext } from './App';
 
 function ProductBox(props) {
+
+  const { user, setUser } = useContext(AuthContext);
+
+
   const black__style = {
     backgroundColor: "white",
     border: "1px solid black",
@@ -13,14 +20,15 @@ function ProductBox(props) {
     }
   };
 
-  function handleClick(e) {
-    var x = {
-      title: props.title,
-      author: props.author,
-      price: props.price
-    };
-    props.addtowishlist.push(x);
-    console.log(props.addtowishlist);
+
+  const handleWishList = async (book_id) => {
+    const data = await addToWishList({ email: user.email, book_id: book_id });
+    alert(data.message);
+  }
+
+  const handleBuyBook = async (book_id) => {
+    const data = await buyBook({ email: user.email, book_id: book_id });
+    alert(data.message);
   }
 
   return (
@@ -30,8 +38,8 @@ function ProductBox(props) {
         <p>By {props.author}</p>
         <h3 className="product__price">${props.price}</h3>
       </div>
-      <button>Buy Now</button>
-      <button style={black__style} onClick={handleClick}>
+      <button onClick={handleBuyBook}>Buy Now</button>
+      <button style={black__style} onClick={handleWishList}>
         Wishlist
       </button>
     </div>
