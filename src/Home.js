@@ -14,31 +14,32 @@ import addToWishList from "../src/service/buy/AddToWishList";
 import buyBook from "../src/service/buy/BuyBook";
 import {AuthContext} from './App';
 
-let addtowishlist = [];
+
 
 function Home() {
   const style = {
     margin: "20px auto",
     color: "grey"
   };
+
   const [bookList,setBookList]=useState([]);
   const [bookName,setBookName]=useState("");
   const { user, setUser } = useContext(AuthContext);
 
   useEffect(() => {
     const init = async () => {
-      const data=await getAvailableBook();
+      const data = await getAvailableBook();
       setBookList(data);
     };
     init();
-  },[]);
+  }, []);
 
-  const handleSearch = async () =>{
+  const handleSearch = async () => {
     //console.log("HII");
     setBookName(bookName);
-    const data=await searchBook({bookName});
+    const data = await searchBook({ bookName });
     setBookName(data);
-    
+
   }
 
   const handleWishList= async (book_id) =>{
@@ -86,31 +87,17 @@ function Home() {
               <h3 style={style}>Your Dashboard</h3>
             </div>
 
+
             <div className="home__row">
-              <ProductBox
-                title="Think Like a Monk"
-                author="Jay shetty"
-                price="70"
-                addtowishlist={addtowishlist}
-              />
-              <ProductBox
-                title="Think Like Monk1"
-                author="Jay shetty1"
-                price="80"
-                addtowishlist={addtowishlist}
-              />
-              <ProductBox
-                title="Think Like Monk2"
-                author="Jay shetty2"
-                price="90"
-                addtowishlist={addtowishlist}
-              />
-              <ProductBox
-                title="Think Like Monk3"
-                author="Jay shetty3"
-                price="100"
-                addtowishlist={addtowishlist}
-              />
+
+              {bookList && bookList.map((d, i) => {
+                < ProductBox
+                  title="Think Like a Monk"
+                  author="Jay shetty"
+                  price="70"
+                />
+              })}
+
             </div>
           </div>
         </div>
