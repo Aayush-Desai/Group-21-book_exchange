@@ -130,8 +130,8 @@ export default function Login() {
   );
 }
 
-Login.propTypes = {
-  setToken: PropTypes.func.isRequired
-};
+// Login.propTypes = {
+//   setToken: PropTypes.func.isRequired
+// };
 
 // --------------------------------------------------------------------

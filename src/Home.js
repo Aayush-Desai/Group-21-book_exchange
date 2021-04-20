@@ -15,7 +15,7 @@ import buyBook from "../src/service/buy/BuyBook";
 import {AuthContext} from './App';
 
 
-
+let addtowishlist=[]
 function Home() {
   const style = {
     margin: "20px auto",
@@ -29,17 +29,18 @@ function Home() {
   useEffect(() => {
     const init = async () => {
       const data = await getAvailableBook();
+      console.log(data);
       setBookList(data);
     };
     init();
-  }, []);
+  },[]);
 
   const handleSearch = async () => {
     //console.log("HII");
-    setBookName(bookName);
-    const data = await searchBook({ bookName });
-    setBookName(data);
-
+    //setBookName(bookName);
+    const data=await searchBook({bookName});
+    setBookList(data);
+    
   }
 
   const handleWishList= async (book_id) =>{
@@ -90,13 +91,16 @@ function Home() {
 
             <div className="home__row">
 
-              {bookList && bookList.map((d, i) => {
+              { bookList &&  bookList.map((book) => (
                 < ProductBox
-                  title="Think Like a Monk"
-                  author="Jay shetty"
-                  price="70"
+                  title={book.book_name}
+                  author={book.author}
+                  price={book.price}
+                  handleWishList={handleWishList}
+                  handleBuyBook={handleBuyBook}
                 />
-              })}
+              )) 
+              }
 
             </div>
           </div>

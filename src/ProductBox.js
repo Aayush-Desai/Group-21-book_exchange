@@ -6,8 +6,6 @@ import { AuthContext } from './App';
 
 function ProductBox(props) {
 
-  const { user, setUser } = useContext(AuthContext);
-
 
   const black__style = {
     backgroundColor: "white",
@@ -21,15 +19,15 @@ function ProductBox(props) {
   };
 
 
-  const handleWishList = async (book_id) => {
-    const data = await addToWishList({ email: user.email, book_id: book_id });
-    alert(data.message);
-  }
+  // const handleWishList = async (book_id) => {
+  //   const data = await addToWishList({ email: user.email, book_id: book_id });
+  //   alert(data.message);
+  // }
 
-  const handleBuyBook = async (book_id) => {
-    const data = await buyBook({ email: user.email, book_id: book_id });
-    alert(data.message);
-  }
+  // const handleBuyBook = async (book_id) => {
+  //   const data = await buyBook({ email: user.email, book_id: book_id });
+  //   alert(data.message);
+  // }
 
   return (
     <div className="product">
@@ -38,8 +36,8 @@ function ProductBox(props) {
         <p>By {props.author}</p>
         <h3 className="product__price">${props.price}</h3>
       </div>
-      <button onClick={handleBuyBook}>Buy Now</button>
-      <button style={black__style} onClick={handleWishList}>
+      <button onClick={props.handleBuyBook}>Buy Now</button>
+      <button style={black__style} onClick={props.handleWishList}>
         Wishlist
       </button>
     </div>

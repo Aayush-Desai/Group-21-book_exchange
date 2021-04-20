@@ -34,6 +34,9 @@ export default function WishList() {
   const handleRemove= async (book_id) =>{
     const data=await removeFromwishlist({book_id: book_id});
     alert(data.message);
+    const data1=await getFromwishlist();
+    setBookList(data1);
+    
   }
 
   console.log(bookList);
