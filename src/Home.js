@@ -36,11 +36,9 @@ function Home() {
   }, []);
 
   const handleSearch = async () => {
-    //console.log("HII");
-    //setBookName(bookName);
     const data = await searchBook({ bookName });
     setBookList(data);
-
+    setBookName("");
   }
 
   const handleWishList = async (book_id) => {
@@ -81,10 +79,10 @@ function Home() {
 
           <div className="home__mainbar">
             <div className="searchbar_container">
-              <SearchBar />
+              <SearchBar bookName={bookName} setBookName={setBookName} handleSearch={handleSearch}/>
             </div>
             <div className="mainbar__container">
-              <h1>Hello, 201801441</h1>
+              <h1>Hello, {user.name}</h1>
               <h3 style={style}>Your Dashboard</h3>
             </div>
 
