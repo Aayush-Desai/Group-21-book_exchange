@@ -16,7 +16,8 @@ const cors = require("cors");
 app.use(session({
 	secret: 'secret',
 	resave: true,
-	saveUninitialized: true
+	saveUninitialized: true,
+	maxAge: 30 * 86400 * 1000
 }));
 app.use(cors());
 app.use(bodyparser.urlencoded({ extended: true }));

@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useState ,useContext} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./MyProfile.css";
 import Navbar from "./NavBar";
 import Home from "./Home";
 import WishList from "./WishList";
 import { NavLink } from "react-router-dom";
+import {AuthContext} from './App';
+import logout from "../src/service/auth/logout";
 
 export default function MyProfile() {
+
+  const { setVar,user,setUser } = useContext(AuthContext);
+
   const style = {
     margin: "20px auto",
     color: "grey"
@@ -14,6 +19,11 @@ export default function MyProfile() {
   const style1 = {
     marginBottom: "50px"
   };
+  const onClickHandler= async () =>{
+    const data=await logout();
+    if(data.success) setVar(false);
+    else alert(data.message);
+  }
   return (
     <div>
       <Navbar />
@@ -47,13 +57,13 @@ export default function MyProfile() {
                   <h3 style={style1}>My Profile</h3>
 
                   <div style={{ marginRight: "50px" }}>
-                    <p>Name : xyz</p>
+                    <p>Name : {user.name}</p>
                     <hr />
-                    <p>Email : xyz@daict.ac.in</p>
+                    <p>Email : {user.email}</p>
                     <hr />
-                    <p>Student ID : xyz</p>
+                    <p>Student ID : {user.student_id}</p>
                     <hr />
-                    <p>Mobile No. : +91 9999999999</p>
+                    <p>Mobile No. : {user.mobile}</p>
                     <hr />
 
                     <br />
@@ -61,7 +71,11 @@ export default function MyProfile() {
                 </div>
               </div>
             </div>
+            <div style={{display:"flex",justifyContent:"center"}}>
+              <button className="button" onClick={onClickHandler}> Logout </button>
+            </div>
           </div>
+ 
         </div>
       </div>
     </div>

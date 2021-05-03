@@ -49,6 +49,7 @@ exports.signup = async (req, res) => {
 };
 
 exports.signin = async (req, res) => {
+  console.log(req.sessionID);
   console.log("reached here");
   if (!req.body.email || !req.body.password)
     return res.json({ success: false, err_code: 403, message: "All fields required!" });
@@ -92,10 +93,10 @@ exports.signin = async (req, res) => {
 };
 
 exports.logout = async (req, res) => {
-	req.session.user = {};
   if (!req.session.loggedin) return res.json({ success: false, err_code: 403, message: "Invalid URL" });
   req.session.loggedin=false;
-  
+  req.session.user = null;
+  req.sessionID = null;
   return res.json({ success: true,message: "Logged Out Successfully!"});
 };
 

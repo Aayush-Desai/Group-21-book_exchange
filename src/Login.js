@@ -50,10 +50,11 @@ export default function Login() {
     if (content.success) 
     {
       const user=await getUser();
+      //console.log();
       setUser(user);
       setRedirect(true);
     }
-    else alert(content.err_code);
+    else alert(content.message);
   };
 
   if (redirect) {

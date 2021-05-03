@@ -26,7 +26,7 @@ function App() {
   //     const content = await response.json();
   //   })();
   // });
-  const [isSet, setVar] = useState({});
+  const [isSet, setVar] = useState(false);
   const [user, setUser] = useState({});
   //if(!isSet) return <Login setVar={setVar}/>
     // Component Did Mount
