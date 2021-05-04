@@ -21,6 +21,7 @@ export default function WishList() {
   useEffect(() => {
     const init = async () => {
       const data=await getFromwishlist();
+      //console.log();
       setBookList(data);
     };
     init();
@@ -36,10 +37,8 @@ export default function WishList() {
     alert(data.message);
     const data1=await getFromwishlist();
     setBookList(data1);
-    
   }
 
-  console.log(bookList);
   return (
     <div>
       <Navbar />
@@ -67,22 +66,24 @@ export default function WishList() {
             </div>
           <div className="home__mainbar">
             <div className="mainbar__container">
-              <h1> Wishlist </h1>
-              <WishlistBox
-                title="Think Like a Monk"
-                author="Jay shetty"
-                price="70"
-              />
-              {/* ----------------------------------------------- */}
-              {/* ----------------------------------------------- */}
-              {/* ----------------------------------------------- */}
-              {/* ----------------------------------------------- */}
-              {/* ----------------WishList code------------------ */}
-              {/* ----------------------------------------------- */}
-              {/* ----------------------------------------------- */}
-              {/* ----------------------------------------------- */}
-              {/* ----------------------------------------------- */}
-            </div>
+            <h1> Wishlist </h1>
+              <div className="home__row">
+                {bookList && bookList.map((book) => (
+                  < WishlistBox
+                    key={book.book_id}
+                    book_id={book.book_id}
+                    isbn={book.isbn}
+                    email={book.email}
+                    title={book.book_name}
+                    author={book.author}
+                    price={book.price}
+                    handleRemove={handleRemove}
+                    handleBuyBook={handleBuyBook}
+                  />
+                ))
+                }
+              </div>
+          </div>
           </div>
         </div>
       </div>

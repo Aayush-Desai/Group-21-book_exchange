@@ -58,6 +58,11 @@
   .product__info > h3 {
     font-size: 2vw;
   }
+  .home__row {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+  }
   
   @media (max-width: 700px) {
     .product {

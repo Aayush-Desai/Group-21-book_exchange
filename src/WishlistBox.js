@@ -1,7 +1,7 @@
 import React from "react";
 import "./WishlistBox.css";
 
-function WishlistBox({ title, author, price }) {
+function WishlistBox(props) {
   const style = {
     backgroundColor: "lightgreen"
   };
@@ -18,12 +18,12 @@ function WishlistBox({ title, author, price }) {
   return (
     <div className="product">
       <div className="product__info">
-        <h2>{title}</h2>
-        <p>By {author}</p>
-        <h3 className="product__price">${price}</h3>
+        <h2>{props.title}</h2>
+        <p>By {props.author}</p>
+        <h3 className="product__price">${props.price}</h3>
       </div>
-      <button style={style}>Buy Now</button>
-      <button style={black__style}>Remove</button>
+      <button onClick={()=>props.handleBuyBook(props.book_id)} style={style}>Buy Now</button>
+      <button onClick={()=>props.handleRemove(props.book_id)} style={black__style}>Remove</button>
     </div>
   );
 }
