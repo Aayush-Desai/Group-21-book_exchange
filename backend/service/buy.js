@@ -17,6 +17,12 @@ const expire = require("../config/tokensexpire");
 
 // Buy Book
 exports.BuyBook = async (req,res) => {
+  // check if already requested for the same book
+  var [err1, result1] = await promise(buyDAO.GetRequest(req));
+  
+  if (err1) return res.json({ success: false, err_code: 500, message: "Internal Server Error. Please try again."});
+  if(result1.rows.length!=0) return res.json({ success: false, err_code: 403, message: "Already Requested for the same book"});
+
   var [err, result] = await promise(buyDAO.BuyBook(req));
 
   if (err) return res.json({ success: false, err_code: 500, message: "Internal Server Error. Please try again."});
@@ -26,6 +32,13 @@ exports.BuyBook = async (req,res) => {
 
 // Add book  to wishlist
 exports.AddToWishList = async (req, res) => {
+      // check if already added to the wishlist
+  var [err1, result1] = await promise(buyDAO.CheckWishlistRequest(req));
+  
+  if (err1) return res.json({ success: false, err_code: 500, message: "Internal Server Error. Please try again."});
+  if(result1.rows.length!=0) return res.json({ success: false, err_code: 403, message: "Already added to Wishlist"});
+
+
     var [err, result] = await promise(buyDAO.AddToWishList(req));
 
     if (err) return res.json({ success: false, err_code: 500, message: "Internal Server Error. Please try again."});

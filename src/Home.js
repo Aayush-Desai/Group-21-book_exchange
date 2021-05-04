@@ -92,6 +92,9 @@ function Home() {
               {bookList && bookList.map((book) => (
                 < ProductBox
                   key={book.book_id}
+                  book_id={book.book_id}
+                  isbn={book.isbn}
+                  email={book.email}
                   title={book.book_name}
                   author={book.author}
                   price={book.price}

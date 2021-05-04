@@ -6,9 +6,21 @@ require("dotenv").config();
 // Buy Book
 exports.BuyBook = async (req) => {
   return db.query("INSERT INTO book_exchange.History(EMAIL,book_id, status) VALUES($1, $2, $3)", [
-    req.body.email, req.body.book_id,2]);
+    req.body.email, Number(req.body.book_id),2]);
 }
 
+exports.GetRequest = async (req) => {
+  return db.query("SELECT * FROM book_exchange.History WHERE email=$1 AND book_id=$2", [
+    req.body.email, Number(req.body.book_id)]);
+}
+
+exports.CheckWishlistRequest = async (req) => {
+  //console.log(req.session.user.email);
+  return db.query(
+    "SELECT * FROM book_exchange.WISHLIST WHERE email=$1 AND book_id=$2",
+  [req.session.user.email,Number(req.body.book_id)]
+  );
+};
 
 // Add book  to wishlist
 exports.AddToWishList = async (req) => {
