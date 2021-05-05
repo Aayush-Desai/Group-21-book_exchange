@@ -36,9 +36,13 @@ function Home() {
   }, []);
 
   const handleSearch = async () => {
-    const data = await searchBook({ bookName });
-    setBookList(data);
-    setBookName("");
+    if(bookName.length<3) alert("Serch field should have atleast 3 characters");
+    else{
+      const data = await searchBook({ bookName });
+      setBookList(data);
+      setBookName("");
+    }
+
   }
 
   const handleWishList = async (book_id) => {
