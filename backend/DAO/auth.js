@@ -22,9 +22,10 @@ exports.addUser = async (req) => {
 };
 
 exports.updateprofile = async (req) => {
-  return db.query("UPDATE book_exchange.USERS SET mobile = $1 WHERE email = $2", [
-    req.body.mobile,
-    req.body.email
+  return db.query("UPDATE book_exchange.USERS SET mobile = $1, student_id = $2 WHERE email=$3", [
+    Number(req.body.mobile),
+    req.body.student_id,
+    req.session.user.email
   ]);
 };
 

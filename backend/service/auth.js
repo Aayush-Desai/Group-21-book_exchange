@@ -110,14 +110,28 @@ exports.getprofile = async (req, res) => {
 };
 
 exports.updateprofile = async (req, res) => {
-  if (!req.body.mobile) {
-    return res.json({ success: false, err_code: 403, message: "Mobile Number Required!" });
+  if (!req.body.mobile || !req.body.student_id) {
+    return res.json({ success: false, err_code: 403, message: "All fields Required!" });
+
+  }
+  if (req.body.mobile.length!==10 || isNaN(req.body.mobile) || isNaN(req.body.student_id)) {
+    return res.json({ success: false, err_code: 403, message: "Enter valid mobile or ID" });
 
   }
 
   var [err, result] = await promise(authDAO.updateprofile(req));
 
-  if (err) return res.json({ success: false, err_code: err.code, message: err });
+  if (err) return res.json({ success: false, err_code: err.code, message: "Internal server Error" });
   
+  var [err1, result1] = await promise(authDAO.getUserByEmail(req));
+  
+  if(!err1) 
+  {
+    var user=result1.rows[0];
+    delete user.password;
+    delete user.verification;
+    req.session.user=user;
+  }
+
   return res.json({ success: true,message: "Profile updated Succesfully"});
 };

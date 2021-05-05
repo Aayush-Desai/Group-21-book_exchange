@@ -1,6 +1,6 @@
 import fetchData from "../../fetchData";
 
-export default async ({ email, mobile }) => {
+export default async ({ email,student_id, mobile }) => {
   const fetchOptions = {
     method: "PUT",
     headers: {
@@ -8,6 +8,7 @@ export default async ({ email, mobile }) => {
     },
     body: {
       email,
+      student_id,
       mobile
     }
   };
