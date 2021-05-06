@@ -4,6 +4,7 @@ import "./AboutUs.css";
 import { FaArrowCircleLeft } from 'react-icons/fa';
 import Navbar from "./NavBar";
 import { NavLink } from "react-router-dom";
+
 import image2 from "./image_abt_us@2x.png";
 //import image1 from "./pattern.png";
 
@@ -11,11 +12,11 @@ export default function AboutUs() {
   return (
     <div className="main__container">
       <Navbar />
-      
+    
       <NavLink to="/">
         <FaArrowCircleLeft style={{fontSize:"40px",margin:"15px"}}/>
       </NavLink>
-      
+    
       <div className="inner__container">
         <div className="inner__para">
           <h1>About Us</h1>
