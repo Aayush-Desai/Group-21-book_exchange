@@ -28,7 +28,7 @@ export default function Register() {
       console.log(token);
       alert(token.message+ ": Click Ok to go to login page");
       setVar(true);
-    } else alert(token.err_code);
+    } else alert(token.message);
   };
 
   // ---------------------------
@@ -60,7 +60,7 @@ export default function Register() {
               <div className="login__box">
                 {/* ------------------------------------------------ */}
                 <form className="a__form" onSubmit={handleSubmit}>
-                  <h3>Log in</h3>
+                  <h3>Sign Up</h3>
 
                   <div className="form-group">
                     <label className="spacing__text">Name</label>
