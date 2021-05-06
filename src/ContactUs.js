@@ -1,8 +1,10 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./ContactUs.css";
-//import ProductBox from "./ProductBox";
+import { FaArrowCircleLeft } from 'react-icons/fa';
 import Navbar from "./NavBar";
+import { NavLink } from "react-router-dom";
+
 //import imgx from "./image__long__hair.png";
 
 export default function AboutUs() {
@@ -11,6 +13,11 @@ export default function AboutUs() {
       <Navbar />
 
       <div className="">
+    
+        <NavLink to="/">
+          <FaArrowCircleLeft style={{fontSize:"40px",margin:"15px"}}/>
+        </NavLink>
+        
         <div className="inner__container1">
           <form className="a__form" action="/Home">
             <h2>Get In Touch</h2>
