@@ -53,7 +53,7 @@ export default function WishList() {
                 <NavLink to="/WishList" className="sidebar__button">
                     <button className="button__in">Wishlist</button>
                 </NavLink>
-                <NavLink to="/Home" className="sidebar__button">
+                <NavLink to="/History" className="sidebar__button">
                     <button className="button__in">History</button>
                 </NavLink>
                 <NavLink to="/Home" className="sidebar__button">

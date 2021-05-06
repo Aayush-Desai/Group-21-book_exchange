@@ -59,7 +59,6 @@ export default function Login() {
 
   if (redirect) {
     setVar(true);
-    return <Redirect to="/Home" />;
   }
 
   // ---------------------------------------

@@ -10,6 +10,7 @@ import AboutUs from "./AboutUs";
 import ContactUs from "./ContactUs";
 import MyProfile from "./MyProfile";
 import WishList from "./WishList";
+import history from "./history";
 //import GoogleBtn from "./GoogleBtn";
 
 export const AuthContext = React.createContext();
@@ -54,6 +55,7 @@ function App() {
           <Switch>
           <div className="App">
             <Route path="/Home" exact component={Home} />
+            <Route path="/History" exact component={history} />
             <Route path="/AbtUs" exact component={AboutUs} />
             <Route path="/ContUs" exact component={ContactUs} />
             <Route path="/MyProf" exact component={MyProfile} />
