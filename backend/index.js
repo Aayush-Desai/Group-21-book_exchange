@@ -37,6 +37,6 @@ app.all("*", (req, res) => {
   return res.json({ success: false, err_code: 404, message: "Invalid URL!" });
 });
 
-app.listen(5000, () => {
+app.listen(process.env.port || 5000, () => {
   console.log("Server has Started on port 5000");
 });

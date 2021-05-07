@@ -6,7 +6,7 @@ require("dotenv").config();
 // Upload a book for sale and add it in book_details table if not already
 exports.SellBook = async (req) => {
 
-  db.query("INSERT INTO book_details(ISBN,book_name,author) VALUES (?, ?, ?) ON CONFLICT (ISBN) DO NOTHING;",
+  db.query("INSERT INTO book_exchange.book_details(ISBN,book_name,author) VALUES ($1, $2, $3) ON CONFLICT (ISBN) DO NOTHING;",
   [req.body.isbn, req.body.book_name, req.body.author], function(err,result){
     if(err) throw err;
     console.log("Inserted data in Books_details");
