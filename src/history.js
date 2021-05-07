@@ -82,6 +82,7 @@ export default function WishList() {
                         author={book.author}
                         price={book.price}
                         mobile={book.mobile}
+                        name={book.seller_name}
                         status={book.status}
                       />
                     ))

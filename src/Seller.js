@@ -9,6 +9,7 @@ import { addtowishlist } from "./Home";
 import { NavLink } from "react-router-dom";
 import SellBook from "../src/service/seller/SellBook";
 import GetBooksForSale from "../src/service/seller/GetBooksForSale";
+import GetRequests from "../src/service/seller/GetRequests";
 //import buyBook from "../src/service/buy/BuyBook";
 import Modal from "@material-ui/core/Modal";
 import { useForm } from "react-hook-form";
@@ -65,6 +66,8 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+var request=[];
+
 export default function WishList() {
 
   const [bookList, setBookList] = useState([]);
@@ -73,20 +76,27 @@ export default function WishList() {
   const [open, setOpen] = useState(false);
   const classes = useStyles();
   const { register, handleSubmit, errors } = useForm(); // initialise the hook
+  
+  const getDetails = async () =>{
+    const data = await GetBooksForSale();
+      setBookList(data);
+      console.log(data);
+      for(var i=0;i<data.length;i++)
+      {
+        const res=await GetRequests({book_id: data[i].book_id});
+        request.push(res);
+      }
+  }
+  
   const onSubmit = async (data) => {
     const response=await SellBook({email: user.email, isbn:data.isbn, price:data.price, course:data.course, book_name:data.bookname, author:data.author});
-    
     console.log(response);
+    setOpen(false);
   };
-
-
-
 
   useEffect(() => {
     const init = async () => {
-      const data = await GetBooksForSale();
-      console.log(data);
-      setBookList(data);
+      await getDetails();
     };
     init();
   }, []);
@@ -196,6 +206,7 @@ export default function WishList() {
                   />
                 ))
                 }
+                {!bookList && <h3>No Books kept for Sale</h3>}
               </div>
             </div>
           </div>

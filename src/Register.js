@@ -16,7 +16,7 @@ export default function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { isSet, setVar } = useContext(AuthContext);
+  const { isReg, setReg } = useContext(AuthContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,13 +29,12 @@ export default function Register() {
     if (token.success) {
       console.log(token);
       alert(token.message+ ": Click Ok to go to login page");
-      setVar(true);
+      setReg(true);
     } else alert(token.message);
   };
   // ---------------------------
   return (
-    <div>
-      {!isSet ? (
+    <React.Fragment>
         <div>
           <Navbar />
           <div className="login__container container-fluid row">
@@ -61,7 +60,7 @@ export default function Register() {
               <div className="login__box">
                 {/* ------------------------------------------------ */}
                 <form className="a__form" onSubmit={handleSubmit}>
-                  <h3>Sign Up</h3>
+                  <h3 style={{marginTop:"-28px"}}>Sign Up</h3>
 
                   <div className="form-group">
                     <label className="spacing__text">Name</label>
@@ -108,12 +107,6 @@ export default function Register() {
             </div>
           </div>
         </div>
-      ) : (
-        <div>
-          <Redirect to="/" />
-        </div>
-        
-      )}
-    </div>
+    </React.Fragment>
   );
 }

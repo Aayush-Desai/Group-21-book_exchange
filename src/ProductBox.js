@@ -31,14 +31,10 @@ function ProductBox(props) {
 
   return (
     <div className="product">
-    <div className="product__info">
-      <h2 >{props.title}</h2>
-    </div>
-      <div className="product__info">
+      <h1>{props.title}</h1>
         <p>By {props.author}</p>
         <h3 className="product__price">${props.price}</h3>
-      </div>
-              <button onClick={() => props.handleBuyBook(props.book_id)}>Buy Now</button>
+          <button onClick={() => props.handleBuyBook(props.book_id)}>Buy Now</button>
       <button style={black__style} onClick={() => props.handleWishList(props.book_id)}>
         Wishlist
       </button>

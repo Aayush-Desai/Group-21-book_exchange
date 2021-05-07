@@ -90,7 +90,7 @@ export default function Login() {
           <div className="login__box">
             {/* ------------------------------------------------ */}
             <form className="a__form" onSubmit={handleSubmit}>
-              <h3>Log in</h3>
+              <h3 style={{marginBottom:"20px"}}>Log in</h3>
 
               <div className="form-group">
                 <label className="spacing__text">Email</label>

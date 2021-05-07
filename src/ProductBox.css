@@ -6,6 +6,7 @@
     margin: 0px 30px;
     padding: 20px;
     width: 50%;
+    height: 500px;
     min-width: 150px;
     max-width: 300px;
     background-color: white;
@@ -13,8 +14,7 @@
     box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
       rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
     border-radius: 10px;
-    height: fit-content;
-    object-fit: contain;
+    overflow: hidden;
   }
   
   .product__rating {

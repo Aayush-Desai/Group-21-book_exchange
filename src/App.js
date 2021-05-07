@@ -29,27 +29,36 @@ function App() {
   //   })();
   // });
   const [isSet, setVar] = useState(false);
+  const [isReg, setReg] = useState(false);
   const [user, setUser] = useState({});
   //if(!isSet) return <Login setVar={setVar}/>
     // Component Did Mount
     useEffect(() => {
       const init = async () => {
         setVar(false);
+        setReg(false);
       };
       init();
     }, []);
   console.log(isSet);
+  console.log(isReg);
   return (
     <BrowserRouter>
-      <AuthContext.Provider value={{isSet,setVar,user,setUser}}>
-        {!isSet?(
+      <AuthContext.Provider value={{isSet,setVar,user,setUser,isReg, setReg}}>
+      {isReg && <Switch>
+        <div className="App">
+          <Redirect to="/"/>
+        </div>
+        </Switch>}
+        {!isSet ?(
           <Switch>
           <div className="App">
+            <Redirect to="/"/>
             <Route path="/" exact component={Login} />
             <Route path="/Reg" exact component={Register} />
             <Route path="/AbtUs" exact component={AboutUs} />
             <Route path="/ContUs" exact component={ContactUs} />
-            <Redirect to="/"/>
+            
           </div>
           </Switch>
         ):(
