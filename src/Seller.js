@@ -7,9 +7,9 @@ import Home from "./Home";
 import MyProf from "./MyProfile";
 import { addtowishlist } from "./Home";
 import { NavLink } from "react-router-dom";
-import getFromwishlist from "../src/service/wishlist/GetFromwishlist";
-import removeFromwishlist from "../src/service/wishlist/removeFromwishlist";
-import buyBook from "../src/service/buy/BuyBook";
+import SellBook from "../src/service/seller/SellBook";
+import GetBooksForSale from "../src/service/seller/GetBooksForSale";
+//import buyBook from "../src/service/buy/BuyBook";
 import Modal from "@material-ui/core/Modal";
 import { useForm } from "react-hook-form";
 import { makeStyles } from "@material-ui/core/styles";
@@ -67,38 +67,30 @@ const useStyles = makeStyles((theme) => ({
 
 export default function WishList() {
 
+  const [bookList, setBookList] = useState([]);
+  const { user} = useContext(AuthContext);
+
   const [open, setOpen] = useState(false);
   const classes = useStyles();
   const { register, handleSubmit, errors } = useForm(); // initialise the hook
   const onSubmit = async (data) => {
-    console.log(data);
+    const response=await SellBook({email: user.email, isbn:data.isbn, price:data.price, course:data.course, book_name:data.bookname, author:data.author});
+    
+    console.log(response);
   };
 
 
-  const [bookList, setBookList] = useState([]);
-  const [bookName, setBookName] = useState("xyz1");
-  const { user, setUser } = useContext(AuthContext);
+
 
   useEffect(() => {
     const init = async () => {
-      const data = await getFromwishlist();
-      //console.log();
+      const data = await GetBooksForSale();
+      console.log(data);
       setBookList(data);
     };
     init();
   }, []);
 
-  const handleBuyBook = async (book_id) => {
-    const data = await buyBook({ email: user.email, book_id: book_id });
-    alert(data.message);
-  }
-
-  const handleRemove = async (book_id) => {
-    const data = await removeFromwishlist({ book_id: book_id });
-    alert(data.message);
-    const data1 = await getFromwishlist();
-    setBookList(data1);
-  }
 
   return (
     <div>
@@ -147,37 +139,46 @@ export default function WishList() {
                 >
                   <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
                     <input
+                      {...register("bookname")}
                       type="text"
                       className={classes.area}
-                      name="username"
+                      name="bookname"
                       placeholder="Book name"
+                      required={true}
                     />
                     <input
+                      {...register("author")}
                       className={classes.area}
-                      name="password"
+                      name="author"
                       placeholder="Author"
                       type="text"
+                      required={true}
                     />
                     <input
+                      {...register("price")}
                       className={classes.area}
-                      name="password"
+                      name="price"
                       placeholder="Price"
                       type="text"
+                      required={true}
                     />
                     <input
+                      {...register("isbn")}
                       className={classes.area}
-                      name="password"
+                      name="isbn"
                       placeholder="ISBN"
                       type="text"
+                      required={true}
                     />
                     <input
+                      {...register("course")}
                       className={classes.area}
-                      name="password"
+                      name="course"
                       placeholder="Course"
                       type="text"
+                      required={true}
                     />
-                    <input className={classes.submit} type="submit" value="Login" />
-                    {console.log(errors)}
+                    <input className={classes.submit} type="submit" value="Submit" />
                   </form>
                 </Modal>
               </div>
@@ -192,8 +193,6 @@ export default function WishList() {
                     title={book.book_name}
                     author={book.author}
                     price={book.price}
-                    handleRemove={handleRemove}
-                    handleBuyBook={handleBuyBook}
                   />
                 ))
                 }

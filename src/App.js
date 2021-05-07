@@ -11,6 +11,7 @@ import ContactUs from "./ContactUs";
 import MyProfile from "./MyProfile";
 import WishList from "./WishList";
 import history from "./history";
+import seller from "./Seller";
 //import GoogleBtn from "./GoogleBtn";
 
 export const AuthContext = React.createContext();
@@ -56,6 +57,7 @@ function App() {
           <div className="App">
             <Route path="/Home" exact component={Home} />
             <Route path="/History" exact component={history} />
+            <Route path="/Seller" exact component={seller} />
             <Route path="/AbtUs" exact component={AboutUs} />
             <Route path="/ContUs" exact component={ContactUs} />
             <Route path="/MyProf" exact component={MyProfile} />

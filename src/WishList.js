@@ -56,7 +56,7 @@ export default function WishList() {
                 <NavLink to="/History" className="sidebar__button">
                     <button className="button__in">History</button>
                 </NavLink>
-                <NavLink to="/Home" className="sidebar__button">
+                <NavLink to="/Seller" className="sidebar__button">
                     <button className="button__in">As Seller</button>
                 </NavLink>
                 <NavLink to="/MyProf" className="sidebar__button">

@@ -7,12 +7,14 @@ import WishList from "./WishList";
 import { NavLink } from "react-router-dom";
 import {AuthContext} from './App';
 import logout from "../src/service/auth/logout";
-import  Updateprofile  from "./updateProfile";
+import Updateprofile from './updateProfile'
+
 
 export default function MyProfile() {
 
   const { setVar,user,setUser } = useContext(AuthContext);
-  const [addBook,setAddBook]=useState(false);
+  const [open, setOpen] = useState(false);
+
 
   const style = {
     margin: "20px auto",
@@ -27,9 +29,6 @@ export default function MyProfile() {
     else alert(data.message);
   }
 
-  const onClickUpdateHandler = () =>{
-    setAddBook(true);
-  }
 
   return (
     <div>
@@ -57,13 +56,8 @@ export default function MyProfile() {
         </div>
       </div>
       <div className="home__mainbar">
-            {addBook?(
-              <Updateprofile setAddBook={setAddBook} />
-            ):(
-              <div></div>
-            )}
+        {open && <Updateprofile setOpen={setOpen}/>}
             <div>
-            
             <div className="mainbar__container">
                   <h3 style={style1}>My Profile</h3>
 
@@ -113,10 +107,8 @@ export default function MyProfile() {
                     className="col-9 col-sm-9 col-md-9 col-lg-9 Input-value"                    
                   >{user.mobile}</div>
               </div>
-
-
                 <div style={{display:"flex",justifyContent:"center",height:"60px"}}>
-                <button className="button" onClick={onClickUpdateHandler}> Update Profile </button>
+                <button className="button" onClick={() => { setOpen(!open) }}> Update Profile </button>
                   <button className="button" onClick={onClickLogoutHandler}> Logout </button>
                 </div>
               </div>

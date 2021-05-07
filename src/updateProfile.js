@@ -3,15 +3,83 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./MyProfile.css";
 import Navbar from "./NavBar";
 import { NavLink } from "react-router-dom";
+import Modal from "@material-ui/core/Modal";
+import { useForm } from "react-hook-form";
+import { makeStyles } from "@material-ui/core/styles";
 import {AuthContext} from './App';
 import updateprofile from "../src/service/auth/updateprofile";
 import getUser from "../src/service/auth/getUser";
 
-export default function updateProfile({setAddBook}) {
+
+
+const useStyles = makeStyles((theme) => ({
+  modal: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center"
+    //maxWidth: "500px"
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    border: "2px solid #000",
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3)
+  },
+  form: {
+    fontfamily: "Georgia",
+    padding: "20px",
+    width: "100%",
+    maxWidth: "500px",
+    background: "#000"
+  },
+  area: {
+    width: "100%",
+    background: "rgba(255,255,255,.1)",
+    border: "none",
+    borderRadius: "4px",
+    fontSize: "15px",
+    outline: "0",
+    padding: "10px",
+    margin: "1em auto",
+    boxSizing: "border-box",
+    backgroundColor: "#e8eeef",
+    color: "#8a97a0"
+  },
+  submit: {
+    color: "#FFF",
+    margin: "1em auto",
+    background: "#1abc9c",
+    fontSize: "18px",
+    textAlign: "center",
+    fontStyle: "normal",
+    width: "100%",
+    border: "1px solid #16a085",
+    borderWidth: "1px 1px 3px",
+    marginBottom: "10px",
+    padding: "15px"
+  }
+}));
+
+export default function updateProfile({setOpen}) {
 
   const { user,setUser } = useContext(AuthContext);
   const [ID,setID]=useState("");
   const [mobile,setMobile]=useState("");
+  const classes = useStyles();
+  const { register, handleSubmit, errors } = useForm(); // initialise the hook
+  
+  const onSubmit = async (data) => {
+    const res = await updateprofile({email: user.email,student_id: data.ID,mobile: data.mobile});
+    if(!res.success) alert(res.message);
+    else
+    {
+      const response=await getUser();
+      //console.log();
+      setUser(response);
+      setOpen(false);
+    }
+  };
 
   useEffect(() =>{
     setMobile(user.mobile);
@@ -26,61 +94,38 @@ export default function updateProfile({setAddBook}) {
   const style1 = {
     marginBottom: "50px"
   };
-  const onClickHandler= async () =>{
-    const data = await updateprofile({email: user.email,student_id: ID,mobile: mobile});
-    if(!data.success) alert(data.message);
-    else
-    {
-      const response=await getUser();
-      //console.log();
-      setUser(response);
-      setAddBook(false);
-    }
-    
-  }
+
   return (
-    <div className="popup-box">
-    <div className="box">
-      <h3 style={{margin:"20px",display:"flex",justifyContent:"center"}}>Update Profile</h3>
-      <div style={{marginBottom:"20px"}} className="row1">
-              <label
-                className="col-3 col-sm-3 col-md-3 col-lg-3 Label"
-                htmlFor="student_id"
-              >
-                Student ID:
-              </label>
+    <div className="pop-up">
+          <Modal
+            className={classes.modal}
+            open={open}
+            onClose={() => {
+              setOpen(false);
+            }}
+          >
+            <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
               <input
+                {...register("ID")}
                 type="text"
-                name="student_id"
-                id="student_id"
-                value={ID}
-                placeholder="Enter Student ID"
-                className="col-9 col-sm-9 col-md-9 col-lg-9 Input-value"
-                onChange={(e) => setID(e.target.value)}
+                defaultValue={ID}
+                className={classes.area}
+                name="ID"
+                placeholder="Student ID"
+                required={true}
               />
-            </div>
-            <div className="row1">
-                <label
-                className="col-3 col-sm-3 col-md-3 col-lg-3 Label"
-                htmlFor="mobile"
-              >
-                Mobile:
-              </label>
               <input
-                type="text"
-                name="mobile"
-                id="mobile"
-                value={mobile}
-                placeholder="Enter 10 digit Number"
-                className="col-9 col-sm-9 col-md-9 col-lg-9 Input-value"
-                onChange={(e) => setMobile(e.target.value)}
-              />
-          </div>
-      <div style={{marginTop:"40px",display:"flex",justifyContent:"center",height:"60px"}}>
-      <button className="button" onClick={onClickHandler}> Save </button>
-        <button className="button" onClick={()=>setAddBook(false)}> Cancel </button>
-      </div>
-    </div>
-  </div>
+              {...register("mobile")}
+              type="text"
+              defaultValue={mobile}
+              className={classes.area}
+              name="mobile"
+              placeholder="Enter Mobile of length 10"
+              required={true}
+            />
+              <input className={classes.submit} type="submit" value="Submit" />
+            </form>
+          </Modal>
+        </div>
   );
 }

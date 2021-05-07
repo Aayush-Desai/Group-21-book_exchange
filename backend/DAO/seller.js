@@ -48,8 +48,8 @@ exports.DeemBook = async (req) => {
 
 // Get the list of books which are currently for sale
 exports.GetBooksForSale = async (req) => {
-  return db.query("select book_exchange.book_details.Book_name,book_details.author,available_books.price from book_exchange.available_books,book_exchange.book_details where available_books.email = $1 and available_books.isbn = book_details.isbn;", [
-    req.session.email]);
+  return db.query("select Book_name,author,price,book_details.isbn from book_exchange.available_books,book_exchange.book_details where available_books.email = $1 and available_books.isbn = book_details.isbn", [
+    req.session.user.email]);
 }
 
 
