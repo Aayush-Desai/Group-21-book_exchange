@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./WishList.css";
+import "./Box.css";
 import Navbar from "./NavBar";
-import WishlistBox from "./WishlistBox";
+import Box from "./Box";
 import Home from "./Home";
 import MyProf from "./MyProfile";
 import { addtowishlist } from "./Home";
 import { NavLink } from "react-router-dom";
+import DeemBook from "../src/service/seller/DeemBook";
 import SellBook from "../src/service/seller/SellBook";
 import GetBooksForSale from "../src/service/seller/GetBooksForSale";
 import GetRequests from "../src/service/seller/GetRequests";
@@ -67,6 +68,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 var request=[];
+var len=[];
 
 export default function WishList() {
 
@@ -79,19 +81,31 @@ export default function WishList() {
   
   const getDetails = async () =>{
     const data = await GetBooksForSale();
-      setBookList(data);
       console.log(data);
+      request=[];
+      len=[];
       for(var i=0;i<data.length;i++)
       {
         const res=await GetRequests({book_id: data[i].book_id});
+        //console.log(res.length);
+        len.push(res.length);
         request.push(res);
       }
+      setBookList(data);
+      //console.log(request.length);
   }
   
   const onSubmit = async (data) => {
     const response=await SellBook({email: user.email, isbn:data.isbn, price:data.price, course:data.course, book_name:data.bookname, author:data.author});
     console.log(response);
     setOpen(false);
+    await getDetails();
+  };
+
+  const deemBook = async ({buyer_email, book_id, isbn, price, course, seller_email}) => {
+    const response=await DeemBook({buyer_email, book_id, isbn, price, course, seller_email});
+    console.log(response);
+    await getDetails();
   };
 
   useEffect(() => {
@@ -130,15 +144,26 @@ export default function WishList() {
           <div className="home__mainbar">
             <div className="mainbar__container">
               <h1> Seller </h1>
+              <div style={{display:"flex",justifyContent:"center"}}>
+                <button
+                style={{width:"80px",
+                margin:"auto",
+                borderRadius: "10px",
+                width:"15%",
+                color:"white",
+                padding: "4px 13px",
+                fontSize: "1.1vw",
+                backgroundColor:"rgb(0, 110, 255)",
+                marginBottom:"5%"}}
+                onClick={() => {
+                  setOpen(!open);
+                }}
+              >
+                Add
+              </button>
+              </div>
 
               <div className="pop-up">
-                <button
-                  onClick={() => {
-                    setOpen(!open);
-                  }}
-                >
-                  Add
-                </button>
 
                 <Modal
                   className={classes.modal}
@@ -194,15 +219,19 @@ export default function WishList() {
               </div>
 
               <div className="home__row">
-                {bookList && bookList.map((book) => (
-                  < WishlistBox
+                {bookList && bookList.map((book,index) => (
+                  < Box
                     key={book.book_id}
                     book_id={book.book_id}
                     isbn={book.isbn}
-                    email={book.email}
+                    price={book.price}
+                    course={book.course}
                     title={book.book_name}
                     author={book.author}
-                    price={book.price}
+                    request={request[index]}
+                    email={user.email}
+                    len={len[index]}
+                    deemBook={deemBook}
                   />
                 ))
                 }
