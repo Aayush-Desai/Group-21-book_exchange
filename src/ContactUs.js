@@ -5,6 +5,7 @@ import { FaArrowCircleLeft } from 'react-icons/fa';
 import Navbar from "./NavBar";
 import { NavLink } from "react-router-dom";
 
+
 //import imgx from "./image__long__hair.png";
 
 export default function AboutUs() {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useContext} from "react";
 import PropTypes from "prop-types";
 import "./LoginRegister.css";
 import Log from "./Login";
@@ -8,13 +8,15 @@ import titleimage from "./main__page__image@2x.png";
 import signupUser from "../src/service/auth/signup";
 import { Redirect } from "react-router";
 import { NavLink } from "react-router-dom";
+import { AuthContext } from './App';
+
 
 export default function Register() {
   // ----------------------
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isSet, setVar] = useState(false);
+  const { isSet, setVar } = useContext(AuthContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,10 +32,9 @@ export default function Register() {
       setVar(true);
     } else alert(token.message);
   };
-
   // ---------------------------
   return (
-    <React.Fragment>
+    <div>
       {!isSet ? (
         <div>
           <Navbar />
@@ -108,8 +109,11 @@ export default function Register() {
           </div>
         </div>
       ) : (
-        <Redirect to="/" />
+        <div>
+          <Redirect to="/" />
+        </div>
+        
       )}
-    </React.Fragment>
+    </div>
   );
 }

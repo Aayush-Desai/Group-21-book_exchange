@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Home.css";
 import ProductBox from "./ProductBox";
-import { NavLink } from "react-router-dom";
+import { NavLink, Redirect } from "react-router-dom";
 import WishlistBox from "./WishlistBox";
 import Navbar from "./NavBar";
 import SearchBar from "./SearchBar";
@@ -24,7 +24,7 @@ function Home() {
 
   const [bookList, setBookList] = useState([]);
   const [bookName, setBookName] = useState("");
-  const { user, setUser } = useContext(AuthContext);
+  const { isSet, setVar,user, setUser } = useContext(AuthContext);
 
   useEffect(() => {
     const init = async () => {
