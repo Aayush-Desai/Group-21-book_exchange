@@ -39,8 +39,8 @@ function Home() {
     if(bookName.length<3) alert("Serch field should have atleast 3 characters");
     else{
       const data = await searchBook({ bookName });
+      console.log(data);
       setBookList(data);
-      setBookName("");
     }
 
   }
@@ -53,6 +53,12 @@ function Home() {
   const handleBuyBook = async (book_id) => {
     const data = await buyBook({ email: user.email, book_id: book_id });
     alert(data.message);
+  }
+
+  const onClickRemove = async ()=>{
+    const data = await getAvailableBook();
+    setBookList(data);
+    setBookName("");
   }
 
   return (
@@ -85,12 +91,28 @@ function Home() {
             <div className="searchbar_container">
               <SearchBar bookName={bookName} setBookName={setBookName} handleSearch={handleSearch}/>
             </div>
+            <div style={{width:"100%",display:"flex",justifyContent:"center"}}>
+              <button 
+              style={{
+                background: "rgb(0, 225, 255)",
+                border: "1px solid white",
+                borderRadius: "30px",
+                marginLeft: "2rem",
+                width: "18%",
+                height:"10%",
+                color: "#000",
+                padding: "7px 20px",
+                fontWeight: "500",
+                outline: "none"
+              }}
+               onClick={onClickRemove}>Remove Filter</button>
+            </div>
             <div className="mainbar__container">
               <h1>Hello, {user.name}</h1>
               <h3 style={style}>Your Dashboard</h3>
             </div>
 
-
+            {bookList.length==0 && <div style={{display:"flex",justifyContent:"center",fontSize:"2vw",heigth:"50%",marginTop:"20%"}}>No Books Available</div>}
             <div className="home__row">
 
               {bookList && bookList.map((book) => (
@@ -102,12 +124,13 @@ function Home() {
                   title={book.book_name}
                   author={book.author}
                   price={book.price}
+                  name={book.name}
+                  mobile={book.mobile}
                   handleWishList={handleWishList}
                   handleBuyBook={handleBuyBook}
                 />
               ))
               }
-
             </div>
           </div>
         </div>

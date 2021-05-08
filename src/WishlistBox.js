@@ -17,12 +17,12 @@ function WishlistBox(props) {
   };
   return (
     <div className="product">
-      <div className="product__info">
-        <h2>{props.title}</h2>
-        <p>By {props.author}</p>
-        <h3 className="product__price">${props.price}</h3>
-      </div>
-      <button onClick={()=>props.handleBuyBook(props.book_id)} style={style}>Buy Now</button>
+    <h4>{props.title}</h4>
+    <p>By {props.author}</p>
+    <h4 className="product__price">${props.price}</h4>
+    <p >Name: {props.name}</p>
+    <p>Mobile: {props.mobile}</p>
+      <button style={{marginTop:"-3.5%",backgroundColor:"lightgreen"}}  onClick={()=>props.handleBuyBook(props.book_id)} >Buy Now</button>
       <button onClick={()=>props.handleRemove(props.book_id)} style={black__style}>Remove</button>
     </div>
   );

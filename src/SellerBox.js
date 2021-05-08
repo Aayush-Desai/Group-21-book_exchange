@@ -18,12 +18,9 @@ function BuyerBox(props) {
   };
   return (
     <div className="product">
-      <div className="product__info">
-        <h1>{props.title}</h1>
+        <h4>{props.title}</h4>
         <p>By {props.author}</p>
-        <h2 className="product__price">${props.price}</h2>
-      </div>
-      <h2>Buyer Details</h2>
+        <h4 className="product__price">${props.price}</h4>
       <p style={{fontSize:"1.5vw"}}>Name: {props.name}</p>
       <p style={{fontSize:"1.5vw"}}>mobile: {props.mobile}</p>
     </div>

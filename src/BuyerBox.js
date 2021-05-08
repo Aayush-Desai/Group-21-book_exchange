@@ -21,7 +21,7 @@ function BuyerBox(props) {
       {props.status===0 && <h3 style={{color:"red",fontWeight:"bold"}}>Sorry Sold Out</h3>}
       {props.status===1 && <h3 style={{color:"green",fontWeight:"bold"}}>Got The Book</h3>}
       {props.status===2 && <h3 style={{color:"blue",fontWeight:"bold"}}>Request Pending</h3>}
-      <h1>{props.title}</h1>
+      <h4>{props.title}</h4>
       <p>By {props.author}</p>
       <h2 className="product__price">${props.price}</h2>
       <p>Seller: {props.name}</p>

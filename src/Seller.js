@@ -217,7 +217,7 @@ export default function WishList() {
                   </form>
                 </Modal>
               </div>
-
+              {bookList.length==0 && <div style={{display:"flex",justifyContent:"center",fontSize:"2vw"}}>No Books kept for Sale!</div>}
               <div className="home__row">
                 {bookList && bookList.map((book,index) => (
                   < Box
@@ -235,7 +235,6 @@ export default function WishList() {
                   />
                 ))
                 }
-                {!bookList && <h3>No Books kept for Sale</h3>}
               </div>
             </div>
           </div>

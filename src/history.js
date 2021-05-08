@@ -74,6 +74,8 @@ export default function WishList() {
             <div >
             {!active ? (
                 <div className="home__row">
+                {buyerBookList.length==0 && <div style={{display:"flex",justifyContent:"center",fontSize:"2vw",marginTop:"20%"}}>No Books bought yet!</div>}
+
                   {buyerBookList.map((book) => (
                       < BuyerBox
                         key={book.book_id}
@@ -90,6 +92,7 @@ export default function WishList() {
                 </div>
             ):
             (<div className="home__row">
+            {sellerBookList.length==0 && <div style={{display:"flex",justifyContent:"center",fontSize:"2vw",marginTop:"20%"}}>No Books sold yet!</div>}
                 {sellerBookList && sellerBookList.map((book) => (
                     < SellerBox
                     key={book.book_id}

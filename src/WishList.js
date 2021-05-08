@@ -21,7 +21,7 @@ export default function WishList() {
   useEffect(() => {
     const init = async () => {
       const data=await getFromwishlist();
-      //console.log();
+      console.log(data);
       setBookList(data);
     };
     init();
@@ -67,6 +67,7 @@ export default function WishList() {
           <div className="home__mainbar">
             <div className="mainbar__container">
             <h1> Wishlist </h1>
+            {bookList.length==0 && <div style={{display:"flex",justifyContent:"center",fontSize:"2vw",heigth:"50%",marginTop:"20%"}}>No Books Wishlisted by you!</div>}
               <div className="home__row">
                 {bookList && bookList.map((book) => (
                   < WishlistBox
@@ -77,6 +78,8 @@ export default function WishList() {
                     title={book.book_name}
                     author={book.author}
                     price={book.price}
+                    name={book.name}
+                    mobile={book.mobile}
                     handleRemove={handleRemove}
                     handleBuyBook={handleBuyBook}
                   />

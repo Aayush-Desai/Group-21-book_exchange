@@ -30,7 +30,7 @@ exports.AddToWishList = async (req) => {
 
 // Display Top 10 books
 exports.GetAvailableBook = async (req) => {
-  return db.query("SELECT book_id,email,AVAILABLE_BOOKS.isbn,course,price,book_name,author FROM book_exchange.AVAILABLE_BOOKS NATURAL JOIN book_exchange.book_details LIMIT 10");
+  return db.query("with tempdetail as(SELECT book_id,email,AVAILABLE_BOOKS.isbn,course,price,book_name,author FROM book_exchange.AVAILABLE_BOOKS NATURAL JOIN book_exchange.book_details LIMIT 10) select book_id,tempdetail.email,isbn,course,price,book_name,author,name,mobile from tempdetail inner join book_exchange.users on users.email=tempdetail.email");
 }
 
 
@@ -41,6 +41,7 @@ exports.SearchBook = async (req) => {
   qur+= req.query.bookname;
   qur+="%";
   qur+="'";
-  return db.query(qur);
+  var qur1="with tempdetail as (" + qur + ") select book_id,tempdetail.email,isbn,course,price,book_name,author,name,mobile from tempdetail inner join book_exchange.users on tempdetail.email=users.email";
+  return db.query(qur1);
 }
 
