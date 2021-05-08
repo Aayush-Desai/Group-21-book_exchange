@@ -18,8 +18,8 @@ function BuyerBox(props) {
   };
   return (
     <div className="product">
-      {props.status===0 && <h3 style={{color:"green",fontWeight:"bold"}}>Got The Book</h3>}
-      {props.status===1 && <h3 style={{color:"red",fontWeight:"bold"}}>Sorry Sold Out</h3>}
+      {props.status===0 && <h3 style={{color:"red",fontWeight:"bold"}}>Sorry Sold Out</h3>}
+      {props.status===1 && <h3 style={{color:"green",fontWeight:"bold"}}>Got The Book</h3>}
       {props.status===2 && <h3 style={{color:"blue",fontWeight:"bold"}}>Request Pending</h3>}
       <h1>{props.title}</h1>
       <p>By {props.author}</p>

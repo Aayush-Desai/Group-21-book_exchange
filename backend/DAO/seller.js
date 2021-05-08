@@ -31,17 +31,17 @@ exports.DeleteBook = async (req) => {
 
 // Remove from available_books and add it to Sold_out_books with buyer email and time stamp aslo update status (0 means sold, 1 means bought) in history table
 exports.DeemBook = async (req) => {
-   db.query("UPDATE book_exchange.HISTORY SET status = 1 WHEN email=$1 ELSE 0 where book_id=$2;", [req.body.buyer_email, req.body.book_id],function(err,result){
-     if(err) throw err;
+   db.query("UPDATE book_exchange.HISTORY SET status = CASE WHEN email=$1 THEN 1 ELSE 0 END where book_id=$2", [req.body.buyer_email, req.body.book_id],function(err,result){
+     if(err) return err;
      console.log("History table updated!");
    });
 
-  db.query("Insert into book_exchange.Sold_out_books(book_id,isbn,price,course,buyer_email,seller_email,time_stamp) VALUES($1,$2,$3,$4,$5,$6,CURRENT_TIMESTAMP);"[req.body.book_id, req.body.isbn, Number(req.body.price),req.body.course, req.body.buyer_email, req.body.seller_email], function(err,result){
-    if(err) throw err;
+  db.query("Insert into book_exchange.Sold_out_books(book_id,isbn,price,course,buyer_email,seller_email,time_stamp) VALUES($1,$2,$3,$4,$5,$6,CURRENT_TIMESTAMP)",[req.body.book_id, req.body.isbn, Number(req.body.price),req.body.course, req.body.buyer_email, req.body.seller_email], function(err,result){
+    if(err) return err;
     console.log("Data inserted into Sold_out_books.");
   });
 
-  return db.query("delete from book_exchange.available_books where book_id=$1;", [
+  return db.query("delete from book_exchange.available_books where book_id=$1", [
     req.body.book_id]);
 }
 

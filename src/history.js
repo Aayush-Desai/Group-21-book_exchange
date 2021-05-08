@@ -26,7 +26,7 @@ export default function WishList() {
     useEffect(() => {
         const init = async () => {
           const data=await GetBuyerHistory({email: user.email});
-          //console.log(data);
+          console.log(data);
           setBuyerBookList(data);
           const data1=await GetSellerHistory();
           console.log(data);
