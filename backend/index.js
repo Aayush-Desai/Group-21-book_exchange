@@ -23,7 +23,7 @@ app.use(session({
 }));
 
 // ** MIDDLEWARE ** //
-const whitelist = ['http://localhost:5000', 'https://group-21-book-exchange.herokuapp.com/']
+const whitelist = ['http://localhost:5000/', 'https://group-21-book-exchange.herokuapp.com/']
 const corsOptions = {
   origin: function (origin, callback) {
     console.log("** Origin of request " + origin)
