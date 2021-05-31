@@ -25,8 +25,8 @@ app.use(session({
 // ** MIDDLEWARE ** //
 
 // --> Add this
-app.use(express.static(__dirname + `../build/`));
-app.use(cors);
+//app.use(express.static(__dirname + `../build/`));
+//app.use(cors);
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(bodyparser.json());
 
