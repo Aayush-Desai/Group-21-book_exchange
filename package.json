@@ -35,7 +35,7 @@
     "typescript": "4.1.3"
   },
   "scripts": {
-    "heroku-postbuild": "npm install && npm run build",
+    "heroku-postbuild": "cd backend && npm install && cd .. &&  npm run build",
     "start": "cd backend && nodemon",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
